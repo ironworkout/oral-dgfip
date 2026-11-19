@@ -1,5 +1,7 @@
 # Oral DGFiP — révision active
 
+**En ligne :** https://ironworkout.github.io/oral-dgfip/
+
 Site statique de préparation à l'**entretien d'admission** du concours externe d'agent administratif principal des Finances publiques (catégorie C, branche administrative, concours commun DGFiP / DGDDI).
 
 100 questions, une réponse modèle, trois niveaux de maîtrise, répétition espacée, séances intelligentes, chrono de pitch et sauvegarde de la progression.
