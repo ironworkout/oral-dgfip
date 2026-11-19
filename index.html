@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f9d6a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Oral DGFiP">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="description" content="Révision active de l'oral d'admission d'agent administratif principal des Finances publiques : 100 questions, réponses modèles, mises en situation et répétition espacée.">
+  <title>Oral DGFiP — révision active</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/icone-180.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/icone-512.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+  <script async defer src="https://accounts.google.com/gsi/client"></script>
+</head>
+<body data-ecran="accueil">
+
+  <header class="entete">
+    <div class="entete__int">
+      <a class="marque" href="#" data-nav="accueil" aria-label="Retour à l'accueil">
+        <span class="marque__pastille" aria-hidden="true"></span>
+        <span class="marque__texte">oral<em>dgfip</em></span>
+      </a>
+      <div class="entete__stats">
+        <span class="stat-pill stat-pill--flamme" title="Jours de révision consécutifs">
+          <span aria-hidden="true">🔥</span><b id="serie-entete">0</b>
+        </span>
+        <span class="stat-pill stat-pill--niveau" id="niveau-entete">Débutant</span>
+      </div>
+    </div>
+  </header>
+
+  <main id="principal">
+
+    <input type="file" id="fichier-sauvegarde" accept=".json,application/json" hidden>
+
+    <section id="ecran-accueil" class="ecran actif" aria-label="Parcours de révision"></section>
+    <section id="ecran-seance" class="ecran" aria-label="Séance de révision"></section>
+    <section id="ecran-bilan" class="ecran" aria-label="Bilan de séance"></section>
+    <section id="ecran-banque" class="ecran" aria-label="Banque de questions"></section>
+    <section id="ecran-pitch" class="ecran" aria-label="Préparation du pitch"></section>
+    <section id="ecran-docs" class="ecran" aria-label="Documents de préparation"></section>
+
+  </main>
+
+  <nav class="tabbar" aria-label="Navigation principale">
+    <button class="tab nav__lien actif" data-nav="accueil">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg>
+      <span class="tab__label">Accueil</span>
+    </button>
+    <button class="tab nav__lien" data-nav="pitch">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><path d="M12 17v4"/><path d="M8 21h8"/></svg>
+      <span class="tab__label">Pitch</span>
+    </button>
+    <button class="tab nav__lien" data-nav="banque">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M7 9h10"/><path d="M7 13h6"/></svg>
+      <span class="tab__label">Banque</span>
+    </button>
+    <button class="tab nav__lien" data-nav="docs">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H19v20H6.5A2.5 2.5 0 0 1 4 19.5z"/><path d="M8 7h7"/><path d="M8 11h7"/><path d="M8 15h4"/></svg>
+      <span class="tab__label">Docs</span>
+    </button>
+  </nav>
+
+  <dialog id="modale" class="modale" aria-labelledby="modale-question">
+    <div class="modale__haut">
+      <span class="etiquette" id="modale-etiquette"></span>
+      <button class="modale__fermer" id="modale-fermer" aria-label="Fermer">&times;</button>
+    </div>
+    <h3 class="modale__question" id="modale-question"></h3>
+    <div class="reponse" id="modale-reponse"></div>
+    <div class="modale__niveaux" id="modale-niveaux"></div>
+  </dialog>
+
+  <dialog id="lecteur" class="lecteur" aria-labelledby="lecteur-titre">
+    <div class="lecteur__int">
+      <div class="lecteur__tete">
+        <div>
+          <span class="etiquette" id="lecteur-etiquette"></span>
+          <h2 class="lecteur__titre" id="lecteur-titre"></h2>
+        </div>
+        <button type="button" class="modale__fermer" data-doc-action="fermer" aria-label="Fermer">&times;</button>
+      </div>
+      <div class="lecteur__corps">
+        <img class="lecteur__img" id="lecteur-img" alt="">
+        <ul class="lecteur__points" id="lecteur-points"></ul>
+      </div>
+      <div class="lecteur__pied">
+        <button type="button" class="btn btn--fantome" data-doc-action="precedent">← Précédent</button>
+        <a class="btn btn--fantome" id="lecteur-lien" href="#" target="_blank" rel="noopener">Ouvrir en grand</a>
+        <button type="button" class="btn btn--fantome" data-doc-action="suivant">Suivant →</button>
+      </div>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <noscript>
+    <p class="page">Ce site a besoin de JavaScript pour fonctionner. Active-le dans ton navigateur.</p>
+  </noscript>
+
+  <script src="data/1-parcours.js"></script>
+  <script src="data/2-motivations.js"></script>
+  <script src="data/3-dgfip.js"></script>
+  <script src="data/4-savoir-etre.js"></script>
+  <script src="data/5-situations.js"></script>
+  <script src="data/6-pieges.js"></script>
+  <script src="data/7-actualite.js"></script>
+  <script src="data/8-documents.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

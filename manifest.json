@@ -1,0 +1,16 @@
+{
+  "name": "Oral DGFiP — révision active",
+  "short_name": "Oral DGFiP",
+  "description": "Réviser l'oral d'agent administratif principal des Finances publiques : 100 questions, réponses modèles, mises en situation, répétition espacée.",
+  "lang": "fr",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f3faf6",
+  "theme_color": "#0f9d6a",
+  "icons": [
+    { "src": "assets/icone-180.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "assets/icone-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}
